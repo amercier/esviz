@@ -1,6 +1,6 @@
 {
   "name": "esviz",
-  "version": "1.0.3",
+  "version": "0.1.0-alpha.1",
   "description": "Skeleton of a simple NPM Package with Babel and CI already configured.",
   "license": "ISC",
   "repository": "amercier/esviz",

@@ -29,7 +29,12 @@
     "jsdoc",
     "esdoc"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "bluebird": "^3.3.4",
+    "esprima": "^2.7.2",
+    "lodash": "^4.6.1",
+    "walk": "^2.3.9"
+  },
   "devDependencies": {
     "babel-cli": "^6.7.5",
     "babel-core": "^6.8.0",

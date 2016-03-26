@@ -1,6 +1,8 @@
 esviz
 =====
 
+Automatic diagram generation tool for ES6+ projects.
+
 [![Latest Stable Version](https://img.shields.io/npm/v/esviz.svg)](https://www.npmjs.com/package/esviz)
 [![License](https://img.shields.io/npm/l/esviz.svg)](https://www.npmjs.com/package/esviz)
 [![Build Status](https://img.shields.io/travis/amercier/esviz/master.svg)](https://travis-ci.org/amercier/esviz)

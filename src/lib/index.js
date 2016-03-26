@@ -1,7 +1,3 @@
-/**
- * Exported module
- * @type {Boolean}
- */
-const myModule = true;
+import * as astLib from './ast';
 
-export default myModule;
+export const ast = astLib;

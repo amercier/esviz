@@ -1,0 +1,96 @@
+html, body {
+  margin: 0;
+  overflow: hidden;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+#data {
+  display: none;
+}
+
+.node circle {
+  stroke: #fff;
+  stroke-width: 0.2vh;
+  fill: #000;
+}
+
+.node-root circle {
+  fill: #000;
+}
+
+.node-directory circle {
+  fill: #666;
+}
+
+.node-module circle {
+  fill: #367FBA;
+}
+
+.node-class circle {
+  fill: #BE248D;
+}
+
+.node text {
+  font-size: 11px;
+  text-anchor: middle;
+
+  fill: #000;
+  font-weight: bold;
+
+  text-shadow:
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white;
+}
+
+.node-directory text {
+  fill: #666;
+}
+
+.node {
+  transition: opacity 2s;
+}
+
+.link {
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 3;
+  transition: opacity 2s, stroke 2s, stroke-opacity 2s, stroke-width 2s;
+}
+
+.mode-dir .link-subdir {
+  stroke-opacity: 0.4;
+}
+
+.mode-dir .link-import {
+  stroke-opacity: 0.1;
+  stroke-width: 1;
+}
+
+.mode-module .link-subdir,
+.mode-module .link-child {
+  stroke-opacity: 0.05;
+  stroke-width: 1;
+}
+
+.mode-module .link-import {
+  stroke-width: 1;
+  stroke-opacity: 0.6;
+}
+
+.mode-module .node-root,
+.mode-module .node-directory {
+  opacity: 0.2;
+}
+
+.btn-group {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+}

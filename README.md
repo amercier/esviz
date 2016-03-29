@@ -14,18 +14,15 @@ Automatic diagram generation tool for ES6+ projects.
 [![Code Climate](https://img.shields.io/codeclimate/github/amercier/esviz.svg)](https://codeclimate.com/github/amercier/esviz)
 
 
+![Example with a simple project](https://cloud.githubusercontent.com/assets/1246795/14100868/727b4f46-f545-11e5-83d5-8712cf7f44c0.png)
+
+
 Installation
 ------------
 
-    npm install --save esviz
+    npm install -g esviz
 
 Usage
 -----
 
-### ES5
-
-    var xxx = require('esviz').default;
-
-### ES2015+
-
-    import xxx from 'esviz';
+    esviz src/ > my-project.html

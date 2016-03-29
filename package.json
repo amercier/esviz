@@ -9,7 +9,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "transpile": "rm -rf dist && babel src -d dist",
+    "transpile": "rm -rf dist && babel src -d dist && cp -R src/assets/*.{css,hbs} dist/assets/",
     "prepublish": "npm run transpile",
     "doc": "rm -rf esdoc && esdoc -c esdoc.json",
     "lint": "eslint .",
@@ -17,6 +17,9 @@
     "start": "mocha $(find specs -name '*.spec.js') --recursive --compilers js:babel-register --watch --growl"
   },
   "main": "dist/lib/index.js",
+  "bin": {
+    "esviz": "dist/lib/cli.js"
+  },
   "keywords": [
     "es6",
     "automatic",
@@ -30,9 +33,13 @@
   ],
   "dependencies": {
     "bluebird": "^3.3.4",
+    "bootstrap": "^3.3.6",
+    "d3": "^3.5.16",
     "esprima": "^2.7.2",
+    "handlebars": "^4.0.5",
     "lodash": "^4.6.1",
-    "walk": "^2.3.9"
+    "walk": "^2.3.9",
+    "web-resource-inliner": "^1.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",

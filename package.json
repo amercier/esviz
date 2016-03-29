@@ -9,7 +9,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "transpile": "rm -rf dist && babel src -d dist && cp -R src/assets/*.{css,hbs} dist/assets/",
+    "transpile": "rm -rf dist && mkdir dist && cp -Rv src/assets dist/assets &&  babel src -d dist",
     "prepublish": "npm run transpile",
     "doc": "rm -rf esdoc && esdoc -c esdoc.json",
     "lint": "eslint .",

@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "mocha": "mocha $(find specs -name '*.spec.js') --recursive --compilers js:babel-register",
     "start": "export NODE_ENV=development; npm run mocha -- --watch --growl",
-    "test": "export NODE_ENV=test; npm run lint && rimraf coverage && nyc npm run mocha"
+    "test": "export NODE_ENV=test; npm run lint && rimraf coverage && nyc npm run mocha",
+    "www-build": "(cd www && npm install && npm run build)"
   },
   "main": "dist/lib/index.js",
   "bin": {

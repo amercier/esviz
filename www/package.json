@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "npm run build-basic-project && npm run build-rsvp && npm run build-videojs",
+    "build-basic-project": "esviz ../specs/fixture > dist/demo-basic-project.html",
+    "build-rsvp": "esviz node_modules/rsvp/lib > dist/demo-rsvp.html",
+    "build-videojs": "esviz node_modules/video.js/src/js > dist/demo-videojs.html"
+  },
+  "devDependencies": {
+    "esviz": "..",
+    "rsvp": "github:tildeio/rsvp.js",
+    "video.js": "https://github.com/videojs/video.js/archive/v5.8.8.tar.gz"
+  }
+}

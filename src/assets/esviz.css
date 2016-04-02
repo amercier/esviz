@@ -21,12 +21,12 @@ html {
   fill: #000;
 }
 
-.node-directory circle {
-  fill: #666;
-}
-
 .node-module circle {
   fill: #367FBA;
+}
+
+.node-external circle {
+  fill: #55B748;
 }
 
 .node-class circle {
@@ -49,8 +49,14 @@ html {
     0 0 0.5vh white;
 }
 
+.node-directory circle,
 .node-directory text {
   fill: #666;
+}
+
+.node-file circle,
+.node-file text {
+  fill: #CCC;
 }
 
 .node {
@@ -73,6 +79,10 @@ html {
   stroke-width: 1;
 }
 
+.mode-dir .link-child-file {
+  stroke: #CCC;
+}
+
 .mode-module .link-subdir,
 .mode-module .link-child {
   stroke-opacity: 0.05;
@@ -85,7 +95,8 @@ html {
 }
 
 .mode-module .node-root,
-.mode-module .node-directory {
+.mode-module .node-directory,
+.mode-module .node-file {
   opacity: 0.2;
 }
 

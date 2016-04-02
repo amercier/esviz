@@ -68,7 +68,6 @@ function updateMode(updateGraph) {
 
   graph.links.forEach(function(link) {
     link.value = modes[mode][link.type];
-    // link.value = modes['dir'][link.type];
   });
 
   if (updateGraph) {
@@ -103,7 +102,7 @@ var link = svg.selectAll('.link')
 
 link.enter().append('line')
   .attr('class', function(d) {
-    return 'link link-' + d.type;
+    return ['link', ['link', d.type].join('-'), ['link', d.type, graph.nodes[d.target].type].join('-')].join(' ');
   });
 
 var node = svg.selectAll('.node')

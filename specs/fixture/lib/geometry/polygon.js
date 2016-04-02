@@ -1,3 +1,4 @@
+import { green } from 'chalk';
 import { log } from '../util/console';
 
 export default class Polygon {
@@ -13,7 +14,7 @@ export default class Polygon {
   // Simple class instance methods using short-hand method
   // declaration
   sayName() {
-    log(`Hi, I am a ${this.name}.`);
+    log(`Hi, I am a ${green(this.name)}.`);
   }
 
   sayHistory() {

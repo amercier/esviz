@@ -57,21 +57,13 @@ describe('ast', () => {
 
     it('adds module nodes', () => {
       [
-        { id: 'main', name: 'main', type: 'module' },
-        { id: 'lib/arithmetic/tripple', name: 'tripple', type: 'module' },
-        { id: 'lib/geometry/polygon', name: 'polygon', type: 'module' },
-        { id: 'lib/geometry/rectangle', name: 'rectangle', type: 'module' },
-        { id: 'lib/geometry/square', name: 'square', type: 'module' },
-        { id: 'lib/util/console', name: 'console', type: 'module' },
+        { id: 'lib.js', name: 'lib', type: 'module' },
+        { id: 'lib/arithmetic/tripple.js', name: 'tripple', type: 'module' },
+        { id: 'lib/geometry/polygon.js', name: 'polygon', type: 'module' },
+        { id: 'lib/geometry/rectangle.js', name: 'rectangle', type: 'module' },
+        { id: 'lib/geometry/square.js', name: 'square', type: 'module' },
+        { id: 'lib/util/console.js', name: 'console', type: 'module' },
       ].forEach(dirNode => expect(result.nodes).to.deep.contain(dirNode));
-    });
-
-    it('adds root -> module child links', () => {
-      expect(result.links).to.deep.contain({ source: '/', target: 'main', type: 'child' });
-    });
-
-    it('adds root -> dir subdir links', () => {
-      expect(result.links).to.deep.contain({ source: '/', target: 'lib', type: 'subdir' });
     });
 
     it('adds dir -> subdir links', () => {
@@ -82,27 +74,35 @@ describe('ast', () => {
       ].forEach(dirNode => expect(result.links).to.deep.contain(dirNode));
     });
 
+    it('adds root -> dir subdir links', () => {
+      expect(result.links).to.deep.contain({ source: '/', target: 'lib', type: 'subdir' });
+    });
+
     it('adds dir -> module child links', () => {
       [
-        { source: 'lib/arithmetic', target: 'lib/arithmetic/tripple', type: 'child' },
-        { source: 'lib/geometry', target: 'lib/geometry/polygon', type: 'child' },
-        { source: 'lib/geometry', target: 'lib/geometry/rectangle', type: 'child' },
-        { source: 'lib/geometry', target: 'lib/geometry/square', type: 'child' },
-        { source: 'lib/util', target: 'lib/util/console', type: 'child' },
+        { source: 'lib/arithmetic', target: 'lib/arithmetic/tripple.js', type: 'child' },
+        { source: 'lib/geometry', target: 'lib/geometry/polygon.js', type: 'child' },
+        { source: 'lib/geometry', target: 'lib/geometry/rectangle.js', type: 'child' },
+        { source: 'lib/geometry', target: 'lib/geometry/square.js', type: 'child' },
+        { source: 'lib/util', target: 'lib/util/console.js', type: 'child' },
       ].forEach(dirNode => expect(result.links).to.deep.contain(dirNode));
+    });
+
+    it('adds root -> module child links', () => {
+      expect(result.links).to.deep.contain({ source: '/', target: 'lib', type: 'subdir' });
     });
 
     it('adds module import links', () => {
       [
-        { source: 'main', target: 'lib/geometry/polygon', type: 'import' },
-        { source: 'main', target: 'lib/geometry/rectangle', type: 'import' },
-        { source: 'main', target: 'lib/geometry/square', type: 'import' },
-        { source: 'main', target: 'lib/arithmetic/tripple', type: 'import' },
-        { source: 'main', target: 'lib/util/console', type: 'import' },
-        { source: 'lib/geometry/polygon', target: 'lib/util/console', type: 'import' },
-        { source: 'lib/geometry/rectangle', target: 'lib/util/console', type: 'import' },
-        { source: 'lib/geometry/rectangle', target: 'lib/geometry/polygon', type: 'import' },
-        { source: 'lib/geometry/square', target: 'lib/geometry/polygon', type: 'import' },
+        { source: 'lib.js', target: 'lib/geometry/polygon.js', type: 'import' },
+        { source: 'lib.js', target: 'lib/geometry/rectangle.js', type: 'import' },
+        { source: 'lib.js', target: 'lib/geometry/square.js', type: 'import' },
+        { source: 'lib.js', target: 'lib/arithmetic/tripple.js', type: 'import' },
+        { source: 'lib.js', target: 'lib/util/console.js', type: 'import' },
+        { source: 'lib/geometry/polygon.js', target: 'lib/util/console.js', type: 'import' },
+        { source: 'lib/geometry/rectangle.js', target: 'lib/util/console.js', type: 'import' },
+        { source: 'lib/geometry/rectangle.js', target: 'lib/geometry/polygon.js', type: 'import' },
+        { source: 'lib/geometry/square.js', target: 'lib/geometry/polygon.js', type: 'import' },
       ].forEach(dirNode => expect(result.links).to.deep.contain(dirNode));
     });
 

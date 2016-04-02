@@ -106,6 +106,17 @@ describe('ast', () => {
       ].forEach(dirNode => expect(result.links).to.deep.contain(dirNode));
     });
 
+    it('adds external modules', () => {
+      expect(result.nodes).to.deep.contain({ id: '/chalk', name: 'chalk', type: 'external' });
+    });
+
+    it('adds modules -> external modules import links', () => {
+      [
+        { source: 'lib/geometry/polygon.js', target: '/chalk', type: 'import' },
+        { source: 'lib/geometry/rectangle.js', target: '/chalk', type: 'import' },
+      ].forEach(dirNode => expect(result.links).to.deep.contain(dirNode));
+    });
+
     // it('debug', () => {
     //   console.log(result);
     // });

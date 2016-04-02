@@ -129,7 +129,18 @@ export function buildItemsFromFile(path) {
   return { node, link };
 }
 
+/**
+ * Resolve a module
+ * @param {string} modulePaths
+ * @param {string} dir
+ * @param {[type]} importName
+ * @return {string} The
+ */
 export function resolveModule(modulePaths, dir, importName) {
+  if (importName[0] !== '.') {
+    return `/${importName}`; // External module
+  }
+
   let resolvedPath;
   extensions.some(extension =>
     modulePaths.some(modulePath => {
@@ -172,7 +183,17 @@ export function parseModule(moduleIds, id, path) {
   return preadFile(path)
     .then(code => parse(code, { sourceType: 'module' }))
     .then(ast => {
-      links.push(...getImportLinksFromAst(moduleIds, ast, id));
+      const importLinks = getImportLinksFromAst(moduleIds, ast, id);
+      links.push(...importLinks);
+      const newExternals = importLinks
+        .map(link => link.target)
+        .filter(moduleId => moduleIds.indexOf(moduleId) === -1)
+        .map(moduleId => ({
+          id: moduleId,
+          name: moduleId.replace(/^\//, ''),
+          type: 'external',
+        }));
+      nodes.push(...newExternals);
       return { nodes, links };
     });
 }
@@ -190,6 +211,9 @@ export function parseModules(root, graph) {
     .map(node => parseModule(moduleIds, node.id, join(root, node.id)))
     .each(subGraph => {
       graph.links.push(...subGraph.links);
+      subGraph.nodes.forEach(node => {
+        graph.nodes[node.id] = node; // eslint-disable-line no-param-reassign
+      });
     })
     .then(() => graph);
 }

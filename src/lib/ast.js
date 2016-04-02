@@ -9,6 +9,12 @@ import { walk } from 'walk';
 const preadFile = promisify(readFile);
 
 /**
+ * Supported file extensions for odules
+ * @type {String[]}
+ */
+export const extensions = ['.js', '.es6', '.jsx', '.es'];
+
+/**
  * Tansform an arrat of file stats into an error message
  * @param {{type: string, error: Error, name: String}[]} nodeStatsArray Array of file stats
  * @return {string} Return an error message
@@ -22,22 +28,53 @@ export function getErrorMessage(nodeStatsArray) {
 /**
  * Get a node id from a relative path
  * @param {string} path Relative path
- * @return {[type]}      [description]
+ * @return {string} The node id
  */
 export function getNodeId(path) {
   return path === '.' ? '/' : path;
 }
 
 /**
- * Build a node from a path
+ * Get a node name from a relative path
+ * @param {string} path Relative path
+ * @return {string} The node name
+ */
+export function getNodeName(path) {
+  return basename(path);
+}
+
+/**
+ * Tranform a file path into a module name
+ * @param {string} path Relative path to a file
+ * @return {string} Relative path to the module
+ */
+export function getModuleName(path) {
+  const extension = extname(path);
+  return basename(path, extension);
+}
+
+/**
+ * Build a node from a file/directory path
  * @param {string} path Relative path
  * @param {string} type Type of node
  * @return {{string} id, {string} name, {string} type} A new node
  */
-export function buildNodeFromPath(path, type) {
-  const id = getNodeId(path);
-  const name = basename(id);
-  return { id, name, type };
+export function buildNodeFromPath(path, type, namer = getNodeName) {
+  return {
+    id: getNodeId(path),
+    name: namer(path),
+    type,
+  };
+}
+
+/**
+ * Test whether a path is a module path
+ * @param {string} path Relative path
+ * @return {boolean} Whether the given path is a module
+ */
+export function isModule(path) {
+  const extension = extname(path);
+  return extensions.indexOf(extension) !== -1;
 }
 
 /**
@@ -45,7 +82,11 @@ export function buildNodeFromPath(path, type) {
  * @param {string} path Relative path
  * @return {{string} id, {string} name, {string} type} A new node
  */
-const buildNodeFromFile = partialRight(buildNodeFromPath, 'module');
+export function buildNodeFromFile(path) {
+  return isModule(path)
+    ? buildNodeFromPath(path, 'module', getModuleName)
+    : buildNodeFromPath(path, 'file');
+}
 
 /**
  * Build a node from a directory path
@@ -88,24 +129,19 @@ export function buildItemsFromFile(path) {
   return { node, link };
 }
 
-/**
- * Test whether a path is a module path
- * @param {string} path Relative path
- * @return {boolean} Whether the given path is a module
- */
-export function isModule(path) {
-  const extension = extname(path);
-  return ['.js', '.es6', '.jsx', '.es'].indexOf(extension) !== -1;
-}
-
-/**
- * Tranform a file path into a module path
- * @param {string} path Relative path to a file
- * @return {string} Relative path to the module
- */
-export function getModulePath(path) {
-  const extension = extname(path);
-  return join(dirname(path), basename(path, extension));
+export function resolveModule(modulePaths, dir, importName) {
+  let resolvedPath;
+  extensions.some(extension =>
+    modulePaths.some(modulePath => {
+      const path = normalize(join(dir, importName + extension));
+      if (path === modulePath) {
+        resolvedPath = path;
+        return true;
+      }
+      return false;
+    })
+  );
+  return resolvedPath;
 }
 
 /**
@@ -114,12 +150,12 @@ export function getModulePath(path) {
  * @param {string} id Id of the module node
  * @return {object[]} An array containing all links from the module modules to its imported modules
  */
-export function getImportLinksFromAst(ast, id) {
+export function getImportLinksFromAst(moduleIds, ast, id) {
   return ast.body
     .filter(s => s.type === 'ImportDeclaration')
     .map(importDeclaration => ({
       source: id,
-      target: normalize(join(dirname(id), importDeclaration.source.value)),
+      target: resolveModule(moduleIds, dirname(id), importDeclaration.source.value),
       type: 'import',
     }));
 }
@@ -130,16 +166,32 @@ export function getImportLinksFromAst(ast, id) {
  * @param {string} path Absolute path to the module file
  * @return {{object}[] nodes, {object}[] links} All nodes and links contained in the ES module
  */
-export function parseModule(id, path) {
+export function parseModule(moduleIds, id, path) {
   const nodes = [];
   const links = [];
-
   return preadFile(path)
     .then(code => parse(code, { sourceType: 'module' }))
     .then(ast => {
-      links.push(...getImportLinksFromAst(ast, id));
+      links.push(...getImportLinksFromAst(moduleIds, ast, id));
       return { nodes, links };
     });
+}
+
+/**
+ * Parse a modules from a graph an return a the graph mutated
+ * @param {string} root Path to the root of the graph
+ * @param {object} graph An existing graph
+ * @return {object} The same graph, with links and nodes added
+ */
+export function parseModules(root, graph) {
+  const moduleIds = Object.keys(graph.nodes);
+  return Promise.resolve(values(graph.nodes))
+    .filter(node => node.type === 'module')
+    .map(node => parseModule(moduleIds, node.id, join(root, node.id)))
+    .each(subGraph => {
+      graph.links.push(...subGraph.links);
+    })
+    .then(() => graph);
 }
 
 /**
@@ -158,15 +210,6 @@ export function parseDirectory(root) {
 
     const walker = walk(root, { followLinks: true });
 
-    // Errors
-    walker.on('errors', (parent, nodeStatsArray) => reject(getErrorMessage(nodeStatsArray)));
-
-    // End
-    walker.on('end', () => resolve({
-      nodes: values(nodes),
-      links,
-    }));
-
     // Process directories
     walker.on('directory', (parent, fileStats, next) => {
       const path = relative(root, join(parent, fileStats.name));
@@ -180,25 +223,23 @@ export function parseDirectory(root) {
     walker.on('file', (parent, fileStats, next) => {
       Promise.resolve()
         .then(() => {
-          if (!isModule(fileStats.name)) {
-            // console.warn(`Warning: ${fileStats.name} is not a ES6 file`);
-            return { nodes: [], links: [] };
-          }
-
-          const path = relative(root, getModulePath(join(parent, fileStats.name)));
+          const path = relative(root, join(parent, fileStats.name));
           const { node, link } = buildItemsFromFile(path);
           nodes[node.id] = node;
           links.push(link);
-
-          return parseModule(node.id, join(parent, fileStats.name));
-        })
-        .then(subGraph => {
-          subGraph.nodes.forEach(node => {
-            nodes[node.id] = node;
-          });
-          links.push(...subGraph.links);
         })
         .then(next);
     });
-  });
+
+    // Errors
+    walker.on('errors', (parent, nodeStatsArray) => reject(getErrorMessage(nodeStatsArray)));
+
+    // End
+    walker.on('end', () => resolve({ nodes, links }));
+  })
+  .then(graph => parseModules(root, graph))
+  .then(graph => ({
+    nodes: values(graph.nodes),
+    links: graph.links,
+  }));
 }

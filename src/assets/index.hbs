@@ -2,15 +2,26 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="./esviz.css">
-  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <script src="../../node_modules/d3/d3.js"></script>
+  <link rel="stylesheet" href="../../node_modules/materialize-css/dist/css/materialize.css" media="screen,projection">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300" media="screen,projection">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-  <div class="btn-group" role="group">
-    <button id="dir-mode-btn" type="button" class="btn btn-default">Folder structure</button>
-    <button id="module-mode-btn" type="button" class="btn btn-default">Module imports</button>
+  <div id="controls">
+    <div class="input-field">
+      <select id="control-display-mode">
+        <option value="dir" selected>Directory structure</option>
+        <option value="module">Module imports</option>
+      </select>
+      <label>Layout</label>
+    </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="../../node_modules/materialize-css/dist/js/materialize.js"></script>
+  <script src="./ui.js"></script>
+
   <pre id="data">{{{json data}}}</pre>
+  <script src="../../node_modules/d3/d3.js"></script>
   <script src="./esviz.js"></script>
 </body>

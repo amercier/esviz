@@ -33,11 +33,11 @@
   ],
   "dependencies": {
     "bluebird": "^3.3.4",
-    "bootstrap": "^3.3.6",
     "d3": "^3.5.16",
     "esprima": "^2.7.2",
     "handlebars": "^4.0.5",
     "lodash": "^4.6.1",
+    "materialize-css": "^0.97.6",
     "walk": "^2.3.9",
     "web-resource-inliner": "^2.0.0"
   },

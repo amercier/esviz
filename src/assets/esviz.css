@@ -100,8 +100,12 @@ html {
   opacity: 0.2;
 }
 
-.btn-group {
+#controls {
   position: fixed;
   top: 1em;
   left: 1em;
+}
+
+#controls .select-wrapper {
+  width: 12em;
 }

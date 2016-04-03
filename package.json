@@ -1,6 +1,6 @@
 {
   "name": "esviz",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Automatic diagram generation tool for ES6+ projects.",
   "license": "ISC",
   "repository": "amercier/esviz",

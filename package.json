@@ -39,6 +39,7 @@
     "handlebars": "^4.0.5",
     "lodash": "^4.6.1",
     "materialize-css": "^0.97.6",
+    "update-notifier": "^0.6.3",
     "walk": "^2.3.9",
     "web-resource-inliner": "^2.0.0"
   },

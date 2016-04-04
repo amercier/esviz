@@ -5,8 +5,14 @@ import { join, resolve } from 'path';
 
 import { all, promisify } from 'bluebird';
 import Handlebars from 'handlebars';
+import updateNotifier from 'update-notifier';
 import { html } from 'web-resource-inliner';
+
 import { parseDirectory } from './ast';
+
+// Updates notification
+const pkg = require(join(__dirname, '..', '..', 'package.json'));
+updateNotifier({ pkg }).notify();
 
 const phtml = promisify(html);
 

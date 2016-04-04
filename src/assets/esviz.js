@@ -10,6 +10,7 @@ var color = d3.scale.category20();
 var force = d3.layout.force();
 
 var svg = d3.select('body').append('svg')
+    .attr('id', 'viz')
     .attr('width', width)
     .attr('height', height)
     .attr('viewbox', '0 0 ' + width + ' ' + height)

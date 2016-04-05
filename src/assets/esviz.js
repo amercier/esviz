@@ -54,8 +54,7 @@ function getNodeIndexById(id) {
 
 var modes = {
   dir: { subdir: 0.5, child: 1, import: 0.05 },
-  // module: { subdir: 0, child: 0, import: 1 }
-  module: { subdir: 0.1, child: 0.1, import: 1 }
+  module: { subdir: 0.05, child: 0.05, import: 0.2 }
 };
 
 function updateMode(updateGraph) {

@@ -2,11 +2,24 @@ import { readFile } from 'fs';
 import { basename, dirname, extname, join, normalize, relative } from 'path';
 
 import { Promise, promisify } from 'bluebird';
-import { parse } from 'esprima';
+import { parse } from 'espree';
 import { partialRight, values } from 'lodash';
 import { walk } from 'walk';
 
 const preadFile = promisify(readFile);
+
+/**
+ * Espree configuration
+ * @type {Object}
+ */
+export const espreeConfig = {
+  comment: true,
+  ecmaVersion: 6,
+  loc: true,
+  range: true,
+  sourceType: 'module',
+  tokens: true,
+};
 
 /**
  * Supported file extensions for odules
@@ -189,7 +202,7 @@ export function parseModule(root, moduleIds, id) {
   const links = [];
   const path = join(root, id);
   return preadFile(path)
-    .then(code => parse(code, { sourceType: 'module' }))
+    .then(code => parse(code, espreeConfig))
     .then(
       ast => {
         const importLinks = getImportLinksFromAst(root, moduleIds, ast, id, path);

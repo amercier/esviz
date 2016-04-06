@@ -10,6 +10,7 @@ var color = d3.scale.category20();
 var force = d3.layout.force();
 
 var svg = d3.select('body').append('svg')
+    .attr('id', 'viz')
     .attr('width', width)
     .attr('height', height)
     .attr('viewbox', '0 0 ' + width + ' ' + height)
@@ -51,20 +52,13 @@ function getNodeIndexById(id) {
   return index;
 }
 
-var mode = 'dir';
 var modes = {
   dir: { subdir: 0.5, child: 1, import: 0.05 },
-  // module: { subdir: 0, child: 0, import: 1 }
-  module: { subdir: 0.1, child: 0.1, import: 1 }
+  module: { subdir: 0.05, child: 0.05, import: 0.2 }
 };
 
 function updateMode(updateGraph) {
   svg.attr('class', 'mode-' + mode);
-
-  Object.keys(modes).forEach(function(m) {
-    console.log();
-    document.getElementById(m + '-mode-btn').classList[mode === m ? 'add' : 'remove']('active');
-  });
 
   graph.links.forEach(function(link) {
     link.value = modes[mode][link.type];
@@ -75,13 +69,6 @@ function updateMode(updateGraph) {
   }
 }
 updateMode();
-
-Object.keys(modes).forEach(function(m) {
-  document.getElementById(m + '-mode-btn').addEventListener('click', function() {
-    mode = m;
-    updateMode(true);
-  });
-});
 
 graph.links.forEach(function(link) {
   link.group = { subdir: 1, child: 2, import: 3 }[link.type];

@@ -2,11 +2,24 @@ import { readFile } from 'fs';
 import { basename, dirname, extname, join, normalize, relative } from 'path';
 
 import { Promise, promisify } from 'bluebird';
-import { parse } from 'esprima';
+import { parse } from 'espree';
 import { partialRight, values } from 'lodash';
 import { walk } from 'walk';
 
 const preadFile = promisify(readFile);
+
+/**
+ * Espree configuration
+ * @type {Object}
+ */
+export const espreeConfig = {
+  comment: true,
+  ecmaVersion: 6,
+  loc: true,
+  range: true,
+  sourceType: 'module',
+  tokens: true,
+};
 
 /**
  * Supported file extensions for odules
@@ -136,22 +149,29 @@ export function buildItemsFromFile(path) {
  * @param {[type]} importName
  * @return {string} The
  */
-export function resolveModule(modulePaths, dir, importName) {
+export function resolveModule(root, modulePaths, dir, importName, path) {
   if (importName[0] !== '.') {
     return `/${importName}`; // External module
   }
 
-  let resolvedPath;
-  extensions.some(extension =>
-    modulePaths.some(modulePath => {
-      const path = normalize(join(dir, importName + extension));
-      if (path === modulePath) {
-        resolvedPath = path;
-        return true;
-      }
-      return false;
-    })
+  const possibleModulePaths = [...extensions, ''].map(
+    extension => relative(root, normalize(join(root, dir, importName + extension)))
   );
+
+  let resolvedPath;
+  possibleModulePaths.some((modulePath) => {
+    if (modulePaths.indexOf(modulePath) !== -1) {
+      resolvedPath = modulePath;
+      return true;
+    }
+    return false;
+  });
+
+  if (!resolvedPath) {
+    throw new Error(`Cannot resolve module "${importName}" from "${path}".
+      Tried [${possibleModulePaths.join(', ')}] in [${modulePaths.join(', ')}]`
+    );
+  }
   return resolvedPath;
 }
 
@@ -159,14 +179,15 @@ export function resolveModule(modulePaths, dir, importName) {
  * Get all import links from a parsed ES module
  * @param {AST} ast Parsed ES module
  * @param {string} id Id of the module node
+ * @param {string} path Absolute path to the module file
  * @return {object[]} An array containing all links from the module modules to its imported modules
  */
-export function getImportLinksFromAst(moduleIds, ast, id) {
+export function getImportLinksFromAst(root, moduleIds, ast, id, path) {
   return ast.body
     .filter(s => s.type === 'ImportDeclaration')
     .map(importDeclaration => ({
       source: id,
-      target: resolveModule(moduleIds, dirname(id), importDeclaration.source.value),
+      target: resolveModule(root, moduleIds, dirname(id), importDeclaration.source.value, path),
       type: 'import',
     }));
 }
@@ -174,28 +195,35 @@ export function getImportLinksFromAst(moduleIds, ast, id) {
 /**
  * Parse an ES module and return all its node and links
  * @param {string} id Id of the module to parse
- * @param {string} path Absolute path to the module file
  * @return {{object}[] nodes, {object}[] links} All nodes and links contained in the ES module
  */
-export function parseModule(moduleIds, id, path) {
+export function parseModule(root, moduleIds, id) {
   const nodes = [];
   const links = [];
+  const path = join(root, id);
   return preadFile(path)
-    .then(code => parse(code, { sourceType: 'module' }))
-    .then(ast => {
-      const importLinks = getImportLinksFromAst(moduleIds, ast, id);
-      links.push(...importLinks);
-      const newExternals = importLinks
-        .map(link => link.target)
-        .filter(moduleId => moduleIds.indexOf(moduleId) === -1)
-        .map(moduleId => ({
-          id: moduleId,
-          name: moduleId.replace(/^\//, ''),
-          type: 'external',
-        }));
-      nodes.push(...newExternals);
-      return { nodes, links };
-    });
+    .then(code => parse(code, espreeConfig))
+    .then(
+      ast => {
+        const importLinks = getImportLinksFromAst(root, moduleIds, ast, id, path);
+        links.push(...importLinks);
+        const newExternals = importLinks
+          .map(link => link.target)
+          .filter(moduleId => moduleIds.indexOf(moduleId) === -1)
+          .map(moduleId => ({
+            id: moduleId,
+            name: moduleId.replace(/^\//, ''),
+            type: 'external',
+          }));
+        nodes.push(...newExternals);
+        return { nodes, links };
+      },
+      error => {
+        process.stderr.write(`[WARNING] Error parsing ${join(root, id)}: `
+          + `${error}, imports and external modules ignored.\n`);
+        return { nodes: [], links: [] };
+      }
+    );
 }
 
 /**
@@ -205,10 +233,10 @@ export function parseModule(moduleIds, id, path) {
  * @return {object} The same graph, with links and nodes added
  */
 export function parseModules(root, graph) {
-  const moduleIds = Object.keys(graph.nodes);
+  const moduleIds = Object.keys(graph.nodes).filter(id => graph.nodes[id].type === 'module');
   return Promise.resolve(values(graph.nodes))
     .filter(node => node.type === 'module')
-    .map(node => parseModule(moduleIds, node.id, join(root, node.id)))
+    .map(node => parseModule(root, moduleIds, node.id))
     .each(subGraph => {
       graph.links.push(...subGraph.links);
       subGraph.nodes.forEach(node => {

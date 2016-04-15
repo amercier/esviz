@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="566" height="348" viewBox="38 102 566 348" class="mode-dir">
+<style>
+html, body {
+  margin: 0;
+  overflow: hidden;
+}
+
+svg {
+  font-family: sans-serif;
+}
+
+#data {
+  display: none;
+}
+
+.node circle {
+  stroke: #fff;
+  stroke-width: 0.2vh;
+  fill: #000;
+}
+
+.node-root circle {
+  fill: #000;
+}
+
+.node-module circle {
+  fill: #367FBA;
+}
+
+.node-external circle {
+  fill: #55B748;
+}
+
+.node-class circle {
+  fill: #BE248D;
+}
+
+.node text {
+  font-size: 11px;
+  text-anchor: middle;
+
+  fill: #000;
+  font-weight: bold;
+
+  text-shadow:
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white;
+}
+
+.node-directory circle,
+.node-directory text {
+  fill: #666;
+}
+
+.node-file circle,
+.node-file text {
+  fill: #CCC;
+}
+
+.node {
+  transition: opacity 2s;
+}
+
+.link {
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 3;
+  transition: opacity 2s, stroke 2s, stroke-opacity 2s, stroke-width 2s;
+}
+
+.mode-dir .link-subdir {
+  stroke-opacity: 0.4;
+}
+
+.mode-dir .link-import {
+  stroke-opacity: 0.1;
+  stroke-width: 1;
+}
+
+.mode-dir .link-child-file {
+  stroke: #CCC;
+}
+
+.mode-module .link-subdir,
+.mode-module .link-child {
+  stroke-opacity: 0.05;
+  stroke-width: 1;
+}
+
+.mode-module .link-import {
+  stroke-width: 1;
+  stroke-opacity: 0.6;
+}
+
+.mode-module .node-root,
+.mode-module .node-directory,
+.mode-module .node-file {
+  opacity: 0.2;
+}
+
+#controls {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+}
+
+#controls > * {
+  margin: 0 1em;
+}
+
+#controls .select-wrapper {
+  width: 12em;
+}
+
+#controls .select-dropdown {
+  margin-bottom: 0;
+}
+
+</style>
+<defs><marker id="end" viewBox="0 -5 10 10" refX="27" refY="0" markerWidth="1.6666666666666667" markerHeight="1.6666666666666667" orient="auto"><path d="M0,-5L10,0L0,5"></path></marker></defs><line class="link link-subdir link-subdir-directory" x1="183.04709891856191" y1="253.19359285744542" x2="344.2706940430554" y2="298.33160246351156"></line><line class="link link-child link-child-module" x1="183.04709891856191" y1="253.19359285744542" x2="186.85207485281236" y2="151.88359782715344"></line><line class="link link-child link-child-module" x1="183.04709891856191" y1="253.19359285744542" x2="83.21974149895726" y2="211.60902362156037"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="459.8441384652194" y2="305.62281763728566"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="292.3575114075108" y2="208.47662689894852"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="410.53020941182785" y2="211.64380049068822"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="218.75322489024555" y2="291.34178717465807"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="309.23829753463815" y2="402.28421124966377"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="265.45321979136537" y2="372.11623084574205"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="437.84562617730637" y2="246.61108144494207"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="240.8275363430069" y2="235.87902580917313"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="251.0281827730655" y2="263.2950334892629"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="310.741007284769" y2="175.53839731743514"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="239.09537710949326" y2="362.95337150851304"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="351.15849791194677" y2="424.30232164112147"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="247.02992549813044" y2="312.74629375561847"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="333.23849786347955" y2="197.66386015251467"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="257.8611491457207" y2="201.34925615868835"></line><line class="link link-subdir link-subdir-directory" x1="344.2706940430554" y1="298.33160246351156" x2="478.305621240039" y2="256.1578511031035"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="364.612994684654" y2="396.9370569375608"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="277.206766950673" y2="399.10982340412244"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="392.77736405089763" y2="391.4330159540307"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="356.4873643028866" y2="174.36647518369614"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="217.99080088522103" y2="334.6876451646944"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="429.7081887983752" y2="394.0254081175288"></line><line class="link link-child link-child-module" x1="344.2706940430554" y1="298.33160246351156" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-child link-child-module" x1="478.305621240039" y1="256.1578511031035" x2="577.3836234420598" y2="267.156712040034"></line><line class="link link-child link-child-module" x1="478.305621240039" y1="256.1578511031035" x2="474.68741597580697" y2="143.82038174512624"></line><line class="link link-child link-child-module" x1="478.305621240039" y1="256.1578511031035" x2="545.4959264492769" y2="345.66505822825377"></line><line class="link link-child link-child-module" x1="478.305621240039" y1="256.1578511031035" x2="536.0587229434609" y2="175.67130440332238"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="240.8275363430069" y2="235.87902580917313"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="333.23849786347955" y2="197.66386015251467"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="410.53020941182785" y2="211.64380049068822"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="292.3575114075108" y2="208.47662689894852"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="277.206766950673" y2="399.10982340412244"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="239.09537710949326" y2="362.95337150851304"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="310.741007284769" y2="175.53839731743514"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="217.99080088522103" y2="334.6876451646944"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="265.45321979136537" y2="372.11623084574205"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="309.23829753463815" y2="402.28421124966377"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="247.02992549813044" y2="312.74629375561847"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="356.4873643028866" y2="174.36647518369614"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="392.77736405089763" y2="391.4330159540307"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="251.0281827730655" y2="263.2950334892629"></line><line class="link link-import link-import-module" x1="186.85207485281236" y1="151.88359782715344" x2="218.75322489024555" y2="291.34178717465807"></line><line class="link link-import link-import-module" x1="83.21974149895726" y1="211.60902362156037" x2="257.8611491457207" y2="201.34925615868835"></line><line class="link link-import link-import-module" x1="83.21974149895726" y1="211.60902362156037" x2="186.85207485281236" y2="151.88359782715344"></line><line class="link link-import link-import-module" x1="459.8441384652194" y1="305.62281763728566" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="459.8441384652194" y1="305.62281763728566" x2="429.7081887983752" y2="394.0254081175288"></line><line class="link link-import link-import-module" x1="459.8441384652194" y1="305.62281763728566" x2="536.0587229434609" y2="175.67130440332238"></line><line class="link link-import link-import-module" x1="459.8441384652194" y1="305.62281763728566" x2="351.15849791194677" y2="424.30232164112147"></line><line class="link link-import link-import-module" x1="459.8441384652194" y1="305.62281763728566" x2="309.23829753463815" y2="402.28421124966377"></line><line class="link link-import link-import-module" x1="459.8441384652194" y1="305.62281763728566" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="292.3575114075108" y1="208.47662689894852" x2="437.84562617730637" y2="246.61108144494207"></line><line class="link link-import link-import-module" x1="292.3575114075108" y1="208.47662689894852" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="292.3575114075108" y1="208.47662689894852" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="410.53020941182785" y1="211.64380049068822" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="309.23829753463815" y1="402.28421124966377" x2="240.8275363430069" y2="235.87902580917313"></line><line class="link link-import link-import-module" x1="265.45321979136537" y1="372.11623084574205" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="437.84562617730637" y1="246.61108144494207" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="437.84562617730637" y1="246.61108144494207" x2="459.8441384652194" y2="305.62281763728566"></line><line class="link link-import link-import-module" x1="437.84562617730637" y1="246.61108144494207" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="437.84562617730637" y1="246.61108144494207" x2="429.7081887983752" y2="394.0254081175288"></line><line class="link link-import link-import-module" x1="437.84562617730637" y1="246.61108144494207" x2="536.0587229434609" y2="175.67130440332238"></line><line class="link link-import link-import-module" x1="251.0281827730655" y1="263.2950334892629" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="251.0281827730655" y1="263.2950334892629" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="310.741007284769" y1="175.53839731743514" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="310.741007284769" y1="175.53839731743514" x2="437.84562617730637" y2="246.61108144494207"></line><line class="link link-import link-import-module" x1="310.741007284769" y1="175.53839731743514" x2="364.612994684654" y2="396.9370569375608"></line><line class="link link-import link-import-module" x1="310.741007284769" y1="175.53839731743514" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="239.09537710949326" y1="362.95337150851304" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="239.09537710949326" y1="362.95337150851304" x2="364.612994684654" y2="396.9370569375608"></line><line class="link link-import link-import-module" x1="351.15849791194677" y1="424.30232164112147" x2="309.23829753463815" y2="402.28421124966377"></line><line class="link link-import link-import-module" x1="351.15849791194677" y1="424.30232164112147" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="247.02992549813044" y1="312.74629375561847" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="247.02992549813044" y1="312.74629375561847" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="333.23849786347955" y1="197.66386015251467" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="333.23849786347955" y1="197.66386015251467" x2="459.8441384652194" y2="305.62281763728566"></line><line class="link link-import link-import-module" x1="333.23849786347955" y1="197.66386015251467" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="364.612994684654" y1="396.9370569375608" x2="437.84562617730637" y2="246.61108144494207"></line><line class="link link-import link-import-module" x1="364.612994684654" y1="396.9370569375608" x2="459.8441384652194" y2="305.62281763728566"></line><line class="link link-import link-import-module" x1="364.612994684654" y1="396.9370569375608" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="430.34347181810045" y1="340.904993409573" x2="309.23829753463815" y2="402.28421124966377"></line><line class="link link-import link-import-module" x1="430.34347181810045" y1="340.904993409573" x2="351.15849791194677" y2="424.30232164112147"></line><line class="link link-import link-import-module" x1="430.34347181810045" y1="340.904993409573" x2="429.7081887983752" y2="394.0254081175288"></line><line class="link link-import link-import-module" x1="430.34347181810045" y1="340.904993409573" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="430.34347181810045" y1="340.904993409573" x2="459.8441384652194" y2="305.62281763728566"></line><line class="link link-import link-import-module" x1="430.34347181810045" y1="340.904993409573" x2="577.3836234420598" y2="267.156712040034"></line><line class="link link-import link-import-module" x1="430.34347181810045" y1="340.904993409573" x2="474.68741597580697" y2="143.82038174512624"></line><line class="link link-import link-import-module" x1="430.34347181810045" y1="340.904993409573" x2="536.0587229434609" y2="175.67130440332238"></line><line class="link link-import link-import-module" x1="430.34347181810045" y1="340.904993409573" x2="545.4959264492769" y2="345.66505822825377"></line><line class="link link-import link-import-module" x1="277.206766950673" y1="399.10982340412244" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="392.77736405089763" y1="391.4330159540307" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="356.4873643028866" y1="174.36647518369614" x2="430.34347181810045" y2="340.904993409573"></line><line class="link link-import link-import-module" x1="429.7081887983752" y1="394.0254081175288" x2="309.23829753463815" y2="402.28421124966377"></line><line class="link link-import link-import-module" x1="429.7081887983752" y1="394.0254081175288" x2="351.15849791194677" y2="424.30232164112147"></line><line class="link link-import link-import-module" x1="429.7081887983752" y1="394.0254081175288" x2="459.8441384652194" y2="305.62281763728566"></line><line class="link link-import link-import-module" x1="577.3836234420598" y1="267.156712040034" x2="437.84562617730637" y2="246.61108144494207"></line><line class="link link-import link-import-module" x1="474.68741597580697" y1="143.82038174512624" x2="389.0738470356071" y2="193.22050045194445"></line><line class="link link-import link-import-module" x1="474.68741597580697" y1="143.82038174512624" x2="459.8441384652194" y2="305.62281763728566"></line><line class="link link-import link-import-module" x1="545.4959264492769" y1="345.66505822825377" x2="459.8441384652194" y2="305.62281763728566"></line><line class="link link-import link-import-module" x1="536.0587229434609" y1="175.67130440332238" x2="459.8441384652194" y2="305.62281763728566"></line><g class="node node-root" transform="translate(183.04709891856191,253.19359285744542)"><text dx="0" dy="-1em">/</text><circle r="5"><title>/</title></circle></g><g class="node node-directory" transform="translate(344.2706940430554,298.33160246351156)"><text dx="0" dy="-1em">rsvp</text><circle r="5"><title>rsvp</title></circle></g><g class="node node-module" transform="translate(186.85207485281236,151.88359782715344)"><text dx="0" dy="-1em">rsvp</text><circle r="5"><title>rsvp</title></circle></g><g class="node node-module" transform="translate(83.21974149895726,211.60902362156037)"><text dx="0" dy="-1em">rsvp.umd</text><circle r="5"><title>rsvp.umd</title></circle></g><g class="node node-module" transform="translate(459.8441384652194,305.62281763728566)"><text dx="0" dy="-1em">-internal</text><circle r="5"><title>-internal</title></circle></g><g class="node node-module" transform="translate(292.3575114075108,208.47662689894852)"><text dx="0" dy="-1em">all-settled</text><circle r="5"><title>all-settled</title></circle></g><g class="node node-module" transform="translate(410.53020941182785,211.64380049068822)"><text dx="0" dy="-1em">all</text><circle r="5"><title>all</title></circle></g><g class="node node-module" transform="translate(218.75322489024555,291.34178717465807)"><text dx="0" dy="-1em">asap</text><circle r="5"><title>asap</title></circle></g><g class="node node-module" transform="translate(309.23829753463815,402.28421124966377)"><text dx="0" dy="-1em">config</text><circle r="5"><title>config</title></circle></g><g class="node node-module" transform="translate(265.45321979136537,372.11623084574205)"><text dx="0" dy="-1em">defer</text><circle r="5"><title>defer</title></circle></g><g class="node node-module" transform="translate(437.84562617730637,246.61108144494207)"><text dx="0" dy="-1em">enumerator</text><circle r="5"><title>enumerator</title></circle></g><g class="node node-module" transform="translate(240.8275363430069,235.87902580917313)"><text dx="0" dy="-1em">events</text><circle r="5"><title>events</title></circle></g><g class="node node-module" transform="translate(251.0281827730655,263.2950334892629)"><text dx="0" dy="-1em">filter</text><circle r="5"><title>filter</title></circle></g><g class="node node-module" transform="translate(310.741007284769,175.53839731743514)"><text dx="0" dy="-1em">hash-settled</text><circle r="5"><title>hash-settled</title></circle></g><g class="node node-module" transform="translate(239.09537710949326,362.95337150851304)"><text dx="0" dy="-1em">hash</text><circle r="5"><title>hash</title></circle></g><g class="node node-module" transform="translate(351.15849791194677,424.30232164112147)"><text dx="0" dy="-1em">instrument</text><circle r="5"><title>instrument</title></circle></g><g class="node node-module" transform="translate(247.02992549813044,312.74629375561847)"><text dx="0" dy="-1em">map</text><circle r="5"><title>map</title></circle></g><g class="node node-module" transform="translate(333.23849786347955,197.66386015251467)"><text dx="0" dy="-1em">node</text><circle r="5"><title>node</title></circle></g><g class="node node-module" transform="translate(257.8611491457207,201.34925615868835)"><text dx="0" dy="-1em">platform</text><circle r="5"><title>platform</title></circle></g><g class="node node-directory" transform="translate(478.305621240039,256.1578511031035)"><text dx="0" dy="-1em">promise</text><circle r="5"><title>promise</title></circle></g><g class="node node-module" transform="translate(364.612994684654,396.9370569375608)"><text dx="0" dy="-1em">promise-hash</text><circle r="5"><title>promise-hash</title></circle></g><g class="node node-module" transform="translate(430.34347181810045,340.904993409573)"><text dx="0" dy="-1em">promise</text><circle r="5"><title>promise</title></circle></g><g class="node node-module" transform="translate(277.206766950673,399.10982340412244)"><text dx="0" dy="-1em">race</text><circle r="5"><title>race</title></circle></g><g class="node node-module" transform="translate(392.77736405089763,391.4330159540307)"><text dx="0" dy="-1em">reject</text><circle r="5"><title>reject</title></circle></g><g class="node node-module" transform="translate(356.4873643028866,174.36647518369614)"><text dx="0" dy="-1em">resolve</text><circle r="5"><title>resolve</title></circle></g><g class="node node-module" transform="translate(217.99080088522103,334.6876451646944)"><text dx="0" dy="-1em">rethrow</text><circle r="5"><title>rethrow</title></circle></g><g class="node node-module" transform="translate(429.7081887983752,394.0254081175288)"><text dx="0" dy="-1em">then</text><circle r="5"><title>then</title></circle></g><g class="node node-module" transform="translate(389.0738470356071,193.22050045194445)"><text dx="0" dy="-1em">utils</text><circle r="5"><title>utils</title></circle></g><g class="node node-module" transform="translate(577.3836234420598,267.156712040034)"><text dx="0" dy="-1em">all</text><circle r="5"><title>all</title></circle></g><g class="node node-module" transform="translate(474.68741597580697,143.82038174512624)"><text dx="0" dy="-1em">race</text><circle r="5"><title>race</title></circle></g><g class="node node-module" transform="translate(545.4959264492769,345.66505822825377)"><text dx="0" dy="-1em">reject</text><circle r="5"><title>reject</title></circle></g><g class="node node-module" transform="translate(536.0587229434609,175.67130440332238)"><text dx="0" dy="-1em">resolve</text><circle r="5"><title>resolve</title></circle></g>
+</svg>

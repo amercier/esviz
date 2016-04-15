@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 var graph = JSON.parse(document.getElementById('data').textContent);
 
 var width = 2000,

@@ -9,7 +9,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "transpile": "rimraf dist && mkdir dist && cp -Rv src/assets dist/assets &&  babel src -d dist --only *.js",
+    "transpile": "rimraf dist && mkdir dist && cp -Rv src/assets dist/assets &&  babel src -d dist --only lib/*.js",
     "prepublish": "npm run transpile",
     "doc": "rimraf esdoc && esdoc -c esdoc.json",
     "lint": "eslint .",

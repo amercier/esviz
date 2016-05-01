@@ -48,7 +48,7 @@
     "chai": "^3.5.0",
     "codeclimate-test-reporter": "^0.3.1",
     "codecov": "^1.0.1",
-    "esdoc": "^0.4.6",
+    "esdoc": "^0.4.7",
     "eslint": "^2.5.1",
     "eslint-config-airbnb": "^7.0.0",
     "eslint-plugin-react": "^4.2.3",

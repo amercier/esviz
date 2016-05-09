@@ -2,19 +2,20 @@
   "name": "esviz",
   "version": "0.2.0",
   "description": "Automatic diagram generation tool for ES6+ projects.",
-  "license": "MIT",
+  "license": "ISC",
   "repository": "amercier/esviz",
   "author": "Alex Mercier <pro.alexandre.mercier@gmail.com> (http://amercier.com)",
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "transpile": "rm -rf dist && mkdir dist && cp -Rv src/assets dist/assets &&  babel src -d dist",
+    "transpile": "rimraf dist && mkdir dist && cp -Rv src/assets dist/assets && babel src -d dist",
     "prepublish": "npm run transpile",
-    "doc": "rm -rf esdoc && esdoc -c esdoc.json",
+    "doc": "rimraf esdoc && esdoc -c esdoc.json",
     "lint": "eslint .",
-    "test": "npm run lint && rm -rf coverage && istanbul cover _mocha -- $(find specs -name '*.spec.js') --recursive --compilers js:babel-register",
-    "start": "mocha $(find specs -name '*.spec.js') --recursive --compilers js:babel-register --watch --growl"
+    "mocha": "mocha $(find specs -name '*.spec.js') --recursive --compilers js:babel-register",
+    "start": "export NODE_ENV=development; npm run mocha -- --watch --growl",
+    "test": "export NODE_ENV=test; npm run lint && rimraf coverage && nyc npm run mocha"
   },
   "main": "dist/lib/index.js",
   "bin": {
@@ -42,18 +43,30 @@
     "web-resource-inliner": "^2.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.6.5",
+    "babel-cli": "^6.7.5",
+    "babel-core": "^6.8.0",
+    "babel-plugin-__coverage__": "^0.111111.1",
     "babel-preset-es2015": "^6.6.0",
-    "babel-register": "^6.7.2",
+    "babel-register": "^6.8.0",
     "chai": "^3.5.0",
+    "chalk": "^1.1.3",
     "codeclimate-test-reporter": "^0.3.1",
     "codecov": "^1.0.1",
-    "esdoc": "^0.4.6",
-    "eslint": "^2.5.1",
-    "eslint-config-airbnb": "^7.0.0",
-    "eslint-plugin-react": "^4.2.3",
-    "istanbul": "^1.0.0-alpha.2",
+    "esdoc": "^0.4.7",
+    "eslint": "^2.8.0",
+    "eslint-config-airbnb-base": "^3.0.0",
+    "eslint-plugin-import": "^1.5.0",
     "mocha": "^2.4.5",
-    "sinon": "^1.17.3"
+    "nyc": "^6.4.0",
+    "rimraf": "^2.5.2",
+    "sinon": "^1.17.4"
+  },
+  "nyc": {
+    "exclude": "**",
+    "reporter": [
+      "lcovonly",
+      "html",
+      "text"
+    ]
   }
 }

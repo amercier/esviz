@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="356" height="312" viewBox="142 104 356 312" class="mode-dir">
+<style>
+html, body {
+  margin: 0;
+  overflow: hidden;
+}
+
+svg {
+  font-family: sans-serif;
+}
+
+#data {
+  display: none;
+}
+
+.node circle {
+  stroke: #fff;
+  stroke-width: 0.2vh;
+  fill: #000;
+}
+
+.node-root circle {
+  fill: #000;
+}
+
+.node-module circle {
+  fill: #367FBA;
+}
+
+.node-external circle {
+  fill: #55B748;
+}
+
+.node-class circle {
+  fill: #BE248D;
+}
+
+.node text {
+  font-size: 11px;
+  text-anchor: middle;
+
+  fill: #000;
+  font-weight: bold;
+
+  text-shadow:
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white,
+    0 0 0.5vh white;
+}
+
+.node-directory circle,
+.node-directory text {
+  fill: #666;
+}
+
+.node-file circle,
+.node-file text {
+  fill: #CCC;
+}
+
+.node {
+  transition: opacity 2s;
+}
+
+.link {
+  stroke: #000;
+  stroke-opacity: 0.5;
+  stroke-width: 3;
+  transition: opacity 2s, stroke 2s, stroke-opacity 2s, stroke-width 2s;
+}
+
+.mode-dir .link-subdir {
+  stroke-opacity: 0.4;
+}
+
+.mode-dir .link-import {
+  stroke-opacity: 0.1;
+  stroke-width: 1;
+}
+
+.mode-dir .link-child-file {
+  stroke: #CCC;
+}
+
+.mode-module .link-subdir,
+.mode-module .link-child {
+  stroke-opacity: 0.05;
+  stroke-width: 1;
+}
+
+.mode-module .link-import {
+  stroke-width: 1;
+  stroke-opacity: 0.6;
+}
+
+.mode-module .node-root,
+.mode-module .node-directory,
+.mode-module .node-file {
+  opacity: 0.2;
+}
+
+#controls {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+}
+
+#controls > * {
+  margin: 0 1em;
+}
+
+#controls .select-wrapper {
+  width: 12em;
+}
+
+#controls .select-dropdown {
+  margin-bottom: 0;
+}
+
+</style>
+<defs><marker id="end" viewBox="0 -5 10 10" refX="27" refY="0" markerWidth="1.6666666666666667" markerHeight="1.6666666666666667" orient="auto"><path d="M0,-5L10,0L0,5"></path></marker></defs><line class="link link-child link-child-file" x1="305.1256456540912" y1="145.3044814281522" x2="404.41077315207036" y2="161.34366057565362"></line><line class="link link-subdir link-subdir-directory" x1="305.1256456540912" y1="145.3044814281522" x2="362.7091950536461" y2="230.87391288239436"></line><line class="link link-child link-child-module" x1="305.1256456540912" y1="145.3044814281522" x2="285.61319537090026" y2="243.722810802844"></line><line class="link link-subdir link-subdir-directory" x1="362.7091950536461" y1="230.87391288239436" x2="451.33264678614086" y2="280.19754132888295"></line><line class="link link-subdir link-subdir-directory" x1="362.7091950536461" y1="230.87391288239436" x2="286.7749645023205" y2="306.95740043625875"></line><line class="link link-subdir link-subdir-directory" x1="362.7091950536461" y1="230.87391288239436" x2="375.32435750876266" y2="328.47839053431596"></line><line class="link link-child link-child-module" x1="375.32435750876266" y1="328.47839053431596" x2="296.8877542655702" y2="390.48691278750084"></line><line class="link link-child link-child-module" x1="286.7749645023205" y1="306.95740043625875" x2="197.1342208447995" y2="259.8120036086706"></line><line class="link link-child link-child-module" x1="286.7749645023205" y1="306.95740043625875" x2="186.81484560835173" y2="328.3968421225894"></line><line class="link link-child link-child-module" x1="286.7749645023205" y1="306.95740043625875" x2="225.10085081767156" y2="385.7249672640779"></line><line class="link link-child link-child-module" x1="451.33264678614086" y1="280.19754132888295" x2="408.4855235383512" y2="373.1298933264485"></line><line class="link link-import link-import-module" x1="285.61319537090026" y1="243.722810802844" x2="197.1342208447995" y2="259.8120036086706"></line><line class="link link-import link-import-module" x1="285.61319537090026" y1="243.722810802844" x2="186.81484560835173" y2="328.3968421225894"></line><line class="link link-import link-import-module" x1="285.61319537090026" y1="243.722810802844" x2="225.10085081767156" y2="385.7249672640779"></line><line class="link link-import link-import-module" x1="285.61319537090026" y1="243.722810802844" x2="408.4855235383512" y2="373.1298933264485"></line><line class="link link-import link-import-module" x1="285.61319537090026" y1="243.722810802844" x2="296.8877542655702" y2="390.48691278750084"></line><line class="link link-import link-import-external" x1="197.1342208447995" y1="259.8120036086706" x2="195.06645475407524" y2="179.76382153135287"></line><line class="link link-import link-import-module" x1="197.1342208447995" y1="259.8120036086706" x2="296.8877542655702" y2="390.48691278750084"></line><line class="link link-import link-import-external" x1="186.81484560835173" y1="328.3968421225894" x2="195.06645475407524" y2="179.76382153135287"></line><line class="link link-import link-import-module" x1="186.81484560835173" y1="328.3968421225894" x2="296.8877542655702" y2="390.48691278750084"></line><line class="link link-import link-import-module" x1="186.81484560835173" y1="328.3968421225894" x2="197.1342208447995" y2="259.8120036086706"></line><line class="link link-import link-import-module" x1="225.10085081767156" y1="385.7249672640779" x2="197.1342208447995" y2="259.8120036086706"></line><g class="node node-root" transform="translate(305.1256456540912,145.3044814281522)"><text dx="0" dy="-1em">/</text><circle r="5"><title>/</title></circle></g><g class="node node-file" transform="translate(404.41077315207036,161.34366057565362)"><text dx="0" dy="-1em">README.md</text><circle r="5"><title>README.md</title></circle></g><g class="node node-directory" transform="translate(362.7091950536461,230.87391288239436)"><text dx="0" dy="-1em">lib</text><circle r="5"><title>lib</title></circle></g><g class="node node-module" transform="translate(285.61319537090026,243.722810802844)"><text dx="0" dy="-1em">lib</text><circle r="5"><title>lib</title></circle></g><g class="node node-directory" transform="translate(451.33264678614086,280.19754132888295)"><text dx="0" dy="-1em">arithmetic</text><circle r="5"><title>arithmetic</title></circle></g><g class="node node-directory" transform="translate(286.7749645023205,306.95740043625875)"><text dx="0" dy="-1em">geometry</text><circle r="5"><title>geometry</title></circle></g><g class="node node-directory" transform="translate(375.32435750876266,328.47839053431596)"><text dx="0" dy="-1em">util</text><circle r="5"><title>util</title></circle></g><g class="node node-module" transform="translate(296.8877542655702,390.48691278750084)"><text dx="0" dy="-1em">console</text><circle r="5"><title>console</title></circle></g><g class="node node-module" transform="translate(197.1342208447995,259.8120036086706)"><text dx="0" dy="-1em">polygon</text><circle r="5"><title>polygon</title></circle></g><g class="node node-module" transform="translate(186.81484560835173,328.3968421225894)"><text dx="0" dy="-1em">rectangle</text><circle r="5"><title>rectangle</title></circle></g><g class="node node-module" transform="translate(225.10085081767156,385.7249672640779)"><text dx="0" dy="-1em">square</text><circle r="5"><title>square</title></circle></g><g class="node node-module" transform="translate(408.4855235383512,373.1298933264485)"><text dx="0" dy="-1em">tripple</text><circle r="5"><title>tripple</title></circle></g><g class="node node-external" transform="translate(195.06645475407524,179.76382153135287)"><text dx="0" dy="-1em">chalk</text><circle r="5"><title>chalk</title></circle></g>
+</svg>

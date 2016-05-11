@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 var mode = $('#control-display-mode').val();
 
 /**

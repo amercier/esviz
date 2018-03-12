@@ -40,7 +40,7 @@
     "handlebars": "^4.0.5",
     "lodash": "^4.6.1",
     "walk": "^2.3.9",
-    "web-resource-inliner": "^2.0.0"
+    "web-resource-inliner": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",

@@ -10,12 +10,13 @@
   },
   "scripts": {
     "transpile": "rimraf dist && mkdir dist && cp -Rv src/assets dist/assets &&  babel src -d dist",
-    "prepublish": "npm run transpile",
+    "prepublish": "npm run snyk-protect && npm run transpile",
     "doc": "rimraf esdoc && esdoc -c esdoc.json",
     "lint": "eslint .",
     "mocha": "mocha $(find specs -name '*.spec.js') --recursive --compilers js:babel-register",
     "start": "export NODE_ENV=development; npm run mocha -- --watch --growl",
-    "test": "export NODE_ENV=test; npm run lint && rimraf coverage && nyc npm run mocha"
+    "test": "export NODE_ENV=test; npm run lint && rimraf coverage && nyc npm run mocha",
+    "snyk-protect": "snyk protect"
   },
   "main": "dist/lib/index.js",
   "bin": {
@@ -40,7 +41,8 @@
     "handlebars": "^4.0.5",
     "lodash": "^4.6.1",
     "walk": "^2.3.9",
-    "web-resource-inliner": "^3.0.0"
+    "web-resource-inliner": "^3.0.0",
+    "snyk": "^1.317.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
@@ -67,5 +69,6 @@
       "html",
       "text"
     ]
-  }
+  },
+  "snyk": true
 }

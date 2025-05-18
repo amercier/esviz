@@ -34,7 +34,7 @@
   ],
   "dependencies": {
     "bluebird": "^3.3.4",
-    "bootstrap": "^3.3.6",
+    "bootstrap": "^4.0.0",
     "d3": "^3.5.16",
     "esprima": "^2.7.2",
     "handlebars": "^4.0.5",
